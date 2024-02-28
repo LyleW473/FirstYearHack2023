@@ -1,0 +1,11 @@
+<!-- my_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button Example</title>
+</head>
+<form action="{% url 'todos' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Trigger Function</button>
+</form>
+</html>
