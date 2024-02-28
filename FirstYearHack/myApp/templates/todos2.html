@@ -99,7 +99,13 @@ With each goal accomplished, you build confidence and momentum, propelling you c
                 <input type="text" name="title" id="goalInput" class="w3-input w3-border" placeholder="Enter your goal">
                 <button type="submit" class="w3-button w3-theme-dark">Add Goal</button>
             </form>
-            
+
+            <!-- Form for clearing goals -->
+            <form method="post" action="{% url 'clear_todos' %}">
+                {% csrf_token %}
+                <button type="submit" class="w3-button w3-theme-dark">Clear Goals</button>
+            </form>
+
             <!-- List to display added goals -->
             <ul id="goalList" class="w3-ul w3-margin-top">
                 {% for todo in todos %}
