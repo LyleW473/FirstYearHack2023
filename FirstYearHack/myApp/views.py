@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import ToDoItem
 from .forms import ToDoItemForm
 
@@ -20,6 +20,11 @@ def add_todo(request):
     # Return empty response
     # return HttpResponse(status=200)
     return redirect("todos")
+
+def remove_todo(request, todo_id):  
+    todo = get_object_or_404(ToDoItem, id=todo_id)
+    todo.delete()
+    return redirect("todos")  # Redirect to the todos page after removal
 
 def clear_todos(request):
     ToDoItem.objects.all().delete() # Delete all ToDoItem objects

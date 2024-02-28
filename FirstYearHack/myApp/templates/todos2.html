@@ -111,7 +111,13 @@ With each goal accomplished, you build confidence and momentum, propelling you c
                 {% for todo in todos %}
                 <li class="goal-item">
                     {{ todo.title }}: {% if todo.completed %}Completed{% else %}Incomplete{% endif %}
-                    <button class="remove-button red-button" onclick="removeTodo({{ todo.id }})">X</button>
+
+                    <form method="post" action="{% url 'remove_todo_item' todo.id %}" id="removeTodoForm_{{ todo.id }}">
+                        {% csrf_token %}
+                        <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                        <button type="submit" class="remove-button red-button">X</button>
+                    </form>
+
                 </li>
                 {% endfor %}
             </ul>
