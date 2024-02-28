@@ -16,9 +16,10 @@ def add_todo(request):
         form = ToDoItemForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("Item added successfully", status=200)
+            # return HttpResponse("Item added successfully", status=200)
     # Return empty response
-    return HttpResponse(status=200)
+    # return HttpResponse(status=200)
+    return redirect("todos")
 
 def clear_todos(request):
     ToDoItem.objects.all().delete() # Delete all ToDoItem objects

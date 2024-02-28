@@ -102,13 +102,14 @@ With each goal accomplished, you build confidence and momentum, propelling you c
             
             <!-- List to display added goals -->
             <ul id="goalList" class="w3-ul w3-margin-top">
-    
-                    {% for todo in todos %}
-                    <li>
-                        {{todo.title }}: {% if todo.completed %}Completed{% else %}Incomplete{% endif %}
-                    </li>
-                    {% endfor %}
+                {% for todo in todos %}
+                <li class="goal-item">
+                    {{ todo.title }}: {% if todo.completed %}Completed{% else %}Incomplete{% endif %}
+                    <button class="remove-button red-button" onclick="removeTodo({{ todo.id }})">X</button>
+                </li>
+                {% endfor %}
             </ul>
+
         </div>
         <footer class="w3-container w3-theme-l1">
             <p>Modal footer</p>
@@ -120,14 +121,20 @@ With each goal accomplished, you build confidence and momentum, propelling you c
     .goal-item {
         display: flex;
         align-items: center;
+        justify-content: space-between; /* Align items to start and end of container */
     }
 
     .goal-text {
         flex-grow: 1;
     }
 
-    .remove-button {
-        margin-left: 10px; /* Adjust this value to change the padding */
+    .red-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
     }
 </style>
 
