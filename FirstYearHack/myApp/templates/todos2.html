@@ -14,50 +14,74 @@
 <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
     <h1 class="w3-xxxlarge w3-text-theme">Menu</h1>
     <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
-    <a href="#matches" class="w3-bar-item w3-button">Find a Helper</a>
-    <a href="#chat" class="w3-bar-item w3-button">Chat</a>
-    <a href="#call" class="w3-bar-item w3-button">Call</a>
+    <a href="#matches" class="w3-bar-item w3-button">Find a Match</a>
+    <a href="#chat" class="w3-bar-item w3-button">Chat/Call</a>
     <a href="#mood-tracker" class="w3-bar-item w3-button">Mood Tracker</a>
     <a href="#goals" class="w3-bar-item w3-button">Personal Goals</a>
 </nav>
 
 <!-- Header -->
-<header class="w3-container w3-theme w3-padding" id="myHeader">
+<header class="w3-container w3-theme-dark w3-padding" id="myHeader">
     <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
     <div class="w3-center">
-        <h1 class="w3-xxxlarge w3-animate-bottom">Mental Health Support</h1>
+        <h1 class="w3-xxxlarge w3-animate-bottom">ZenZone</h1>
         <p>Find support, chat, and track your progress.</p>
-<div class="w4-padding-32">
-      <button class="w3-btn w4-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:400;">Start here</button>
-    </div>
 
     </div>
 </header>
 
-<!-- Matches Section -->
-<section class="w3-container w3-padding-64 w3-theme-l5" id="matches">
+<!-- Find a Match Section -->
+<section class="w3-container w3-padding-64 w3-theme-l4" id="find-helper">
     <div class="w3-content">
-        <h2>Find a Helper</h2>
-        <p>Connect with a mental health helper for video chat sessions.</p>
-        <!-- Add form for matching with helpers -->
+        <h2>Find a Match</h2>
+        <p>*Match with a mental health helper to get the support you need.* 
+
+        Connecting with a mental health professional can provide guidance, support, and resources to help you navigate challenges and improve your well-being. </p>
+        <!-- Add form for finding a helper -->
+        <div class="w3-padding-32">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" class="w3-input w3-border">
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" class="w3-input w3-border">
+            <label for="message">Additional Message (Optional):</label>
+            <textarea id="message" class="w3-input w3-border"></textarea>
+            <button onclick="submitHelperRequest()" class="w3-btn w3-theme-dark w3-hover-light-grey" style="font-weight:900;">Find a Helper</button>
+        </div>   
     </div>
 </section>
+
+<script>
+    function submitHelperRequest() {
+        // Get user input
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var message = document.getElementById("message").value;
+
+        // Validate user input
+        if (name.trim() === "" || email.trim() === "") {
+            alert("Please enter your name and email.");
+            return;
+        }
+
+        // You would typically send this data to a backend server for processing
+        // Here, we'll just log the data to the console for demonstration
+        console.log("Name:", name);
+        console.log("Email:", email);
+        console.log("Message:", message);
+
+        // Optionally, you can display a confirmation message to the user
+        alert("Your request has been submitted. We'll match you with a mental health helper shortly.");
+    }
+</script>
+
 
 <!-- Chat Section -->
-<section class="w3-container w3-padding-64 w3-theme-l4" id="chat">
+<section class="w3-container w3-padding-64 w3-theme-l5" id="chat">
     <div class="w3-content">
-        <h2>Chat</h2>
+        <h2>Chat/Call</h2>
         <p>Chat with others who understand what you're going through.</p>
+        <p>After you match with one of our trained peer volunteers you will be able to have a chat or call with them.</p>
         <!-- Add chat interface -->
-    </div>
-</section>
-
-<!-- Call Section -->
-<section class="w3-container w3-padding-64 w3-theme-l5" id="call">
-    <div class="w3-content">
-        <h2>Call</h2>
-        <p>Have a voice conversation with someone who can help.</p>
-        <!-- Add call interface -->
     </div>
 </section>
 
@@ -65,10 +89,105 @@
 <section class="w3-container w3-padding-64 w3-theme-l4" id="mood-tracker">
     <div class="w3-content">
         <h2>Mood Tracker</h2>
-        <p>Track your mood to understand patterns and improve your mental well-being.</p>
-        <!-- Add mood tracking form or interface -->
+        <p>Track your mood to understand your emotional well-being. 
+
+        Recognizing and tracking your mood can help you identify patterns, triggers, and areas of improvement in your mental health journey. </p>
+        <!-- Add button for mood tracker -->
+        <div class="w3-padding-32">
+            <button class="w3-btn w4-xlarge w3-theme-dark w3-hover-light-grey" onclick="document.getElementById('moodTrackerModal').style.display='block'" style="font-weight:900;">Track Your Mood</button>
+        </div>   
+
+        <!-- Modal for mood tracker -->
+        <div id="moodTrackerModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-top">
+                <header class="w3-container w3-theme-l1"> 
+                    <span onclick="document.getElementById('moodTrackerModal').style.display='none'"
+                    class="w3-button w3-display-topright">×</span>
+                    <h4>Track Your Mood</h4>
+                    <h5>Choose your mood for the day <i class="fa fa-smile-o"></i></h5>
+                </header>
+                <div class="w3-padding">
+                    <!-- Form for adding mood entry -->
+                    <form id="moodForm">
+                        <label for="moodDate">Date:</label>
+                        <input type="date" id="moodDate" class="w3-input w3-border">
+                        <label for="moodSelect">Mood:</label>
+                        <select id="moodSelect" class="w3-select w3-border">
+                            <option value="happy">Happy</option>
+                            <option value="sad">Sad</option>
+                            <option value="neutral">Neutral</option>
+                        </select>
+                        <button type="button" onclick="addMoodEntry()" class="w3-button w3-theme-dark">Add Mood Entry</button>
+                    </form>
+                </div>
+                <footer class="w3-container w3-theme-l1">
+                    <p>Modal footer</p>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Display mood entries -->
+        <div id="moodEntries" class="w3-padding">
+            <h3>Your Mood Entries</h3>
+            <ul id="moodList"></ul>
+        </div>
     </div>
 </section>
+
+<script>
+    // Array to store mood entries
+    var moodEntries = [];
+
+    // Function to add a new mood entry
+    function addMoodEntry() {
+        var moodDate = document.getElementById("moodDate").value;
+        var moodSelect = document.getElementById("moodSelect");
+        var mood = moodSelect.options[moodSelect.selectedIndex].text;
+        if (moodDate.trim() === "") {
+            alert("Please select a date.");
+            return;
+        }
+        var moodEntry = {
+            date: moodDate,
+            mood: mood
+        };
+        // Add the mood entry to the array
+        moodEntries.push(moodEntry);
+        // Update the mood entry list
+        updateMoodList();
+        // Reset the form fields after adding the mood entry
+        document.getElementById("moodDate").value = "";
+        document.getElementById("moodSelect").selectedIndex = 0;
+        // Optionally, close the modal after adding the mood entry
+        document.getElementById("moodTrackerModal").style.display = "none";
+    }
+
+    // Function to update the mood entry list
+    function updateMoodList() {
+        var moodList = document.getElementById("moodList");
+        // Clear the existing list
+        moodList.innerHTML = "";
+        // Add each mood entry to the list
+        moodEntries.forEach(function(entry, index) {
+            var listItem = document.createElement("li");
+            listItem.textContent = entry.date + " - " + entry.mood;
+            // Add a button to remove the mood entry
+            var removeButton = document.createElement("button");
+            removeButton.textContent = "❌";
+            removeButton.setAttribute("onclick", "removeMoodEntry(" + index + ")");
+            listItem.appendChild(removeButton);
+            moodList.appendChild(listItem);
+        });
+    }
+
+    // Function to remove a mood entry
+    function removeMoodEntry(index) {
+        moodEntries.splice(index, 1);
+        // Update the mood entry list
+        updateMoodList();
+    }
+</script>
+
 
 <!-- Personal Goals Section -->
 <section class="w3-container w3-padding-64 w3-theme-l5" id="goals">
@@ -91,6 +210,7 @@ It gives you direction, focus, and a sense of purpose. Whether big or small, goa
             <h6>Personal goals provide a clear vision of what you want to achieve and help you stay committed to your aspirations. 
 
 With each goal accomplished, you build confidence and momentum, propelling you closer to your ultimate success. So, dare to dream, set your goals, and watch as your journey unfolds before you.</h6>
+
         </header>
         <div class="w3-padding">
             <!-- Form for adding goals -->
@@ -148,28 +268,8 @@ With each goal accomplished, you build confidence and momentum, propelling you c
     border-radius: 5px;
     cursor: pointer;
     }
+
 </style>
-
-<!-- Footer -->
-<footer class="w3-container w3-theme-dark w3-padding-16">
-    <h3>Footer</h3>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
-        <span class="w3-text w3-theme-light w3-padding">Go To Top</span>  
-        <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge"> <i class="fa fa-chevron-circle-up"></i></span></a>
-    </div>
-    <p>Remember to check out our <a href="w3css_references.asp" class="w3-btn w3-theme-light" target="_blank">W3.CSS Reference</a></p>
-</footer>
-
-<!-- Script for Sidebar -->
-<script>
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-    }
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-    }
-</script>
 
 </body>
 </html>
