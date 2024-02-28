@@ -1,5 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import ToDoItem
+from .forms import ToDoItemForm
+
 
 # Create your views here.
 def home(request):
@@ -8,3 +10,10 @@ def home(request):
 def todos(request):
     items = ToDoItem.objects.all() # Get all instances of ToDoItem in the database
     return render(request=request, template_name="todos.html", context = {"todos": items})
+
+def add_todo(request):
+    if request.method == "POST":
+        form = ToDoItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return redirect("todos")
