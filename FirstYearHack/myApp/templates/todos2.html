@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mental Health Support</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<!-- Side Navigation -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 class="w3-xxxlarge w3-text-theme">Menu</h1>
+    <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
+    <a href="#matches" class="w3-bar-item w3-button">Find a Helper</a>
+    <a href="#chat" class="w3-bar-item w3-button">Chat</a>
+    <a href="#call" class="w3-bar-item w3-button">Call</a>
+    <a href="#mood-tracker" class="w3-bar-item w3-button">Mood Tracker</a>
+    <a href="#goals" class="w3-bar-item w3-button">Personal Goals</a>
+</nav>
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <div class="w3-center">
+        <h1 class="w3-xxxlarge w3-animate-bottom">Mental Health Support</h1>
+        <p>Find support, chat, and track your progress.</p>
+<div class="w4-padding-32">
+      <button class="w3-btn w4-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:400;">Start here</button>
+    </div>
+
+    </div>
+</header>
+
+<!-- Matches Section -->
+<section class="w3-container w3-padding-64 w3-theme-l5" id="matches">
+    <div class="w3-content">
+        <h2>Find a Helper</h2>
+        <p>Connect with a mental health helper for video chat sessions.</p>
+        <!-- Add form for matching with helpers -->
+    </div>
+</section>
+
+<!-- Chat Section -->
+<section class="w3-container w3-padding-64 w3-theme-l4" id="chat">
+    <div class="w3-content">
+        <h2>Chat</h2>
+        <p>Chat with others who understand what you're going through.</p>
+        <!-- Add chat interface -->
+    </div>
+</section>
+
+<!-- Call Section -->
+<section class="w3-container w3-padding-64 w3-theme-l5" id="call">
+    <div class="w3-content">
+        <h2>Call</h2>
+        <p>Have a voice conversation with someone who can help.</p>
+        <!-- Add call interface -->
+    </div>
+</section>
+
+<!-- Mood Tracker Section -->
+<section class="w3-container w3-padding-64 w3-theme-l4" id="mood-tracker">
+    <div class="w3-content">
+        <h2>Mood Tracker</h2>
+        <p>Track your mood to understand patterns and improve your mental well-being.</p>
+        <!-- Add mood tracking form or interface -->
+    </div>
+</section>
+
+<!-- Personal Goals Section -->
+<section class="w3-container w3-padding-64 w3-theme-l5" id="goals">
+    <div class="w3-content">
+        <h2>Personal Goals</h2>
+        <p>Setting personal goals is like creating a roadmap for your dreams. 
+
+It gives you direction, focus, and a sense of purpose. Whether big or small, goals motivate you to take action, push your limits, and grow as an individual. </p>
+        <!-- Add form or interface for setting and tracking goals -->
+ <div class="w3-padding-32">
+      <button class="w3-btn w4-xlarge w3-theme-dark w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Set Your Personal Goals</button>
+    </div>   
+<!-- Modal -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-top">
+        <header class="w3-container w3-theme-l1"> 
+            <span onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright">×</span>
+            <h4>Add Your Goal</h4>
+            <h6>Personal goals provide a clear vision of what you want to achieve and help you stay committed to your aspirations. 
+
+With each goal accomplished, you build confidence and momentum, propelling you closer to your ultimate success. So, dare to dream, set your goals, and watch as your journey unfolds before you.</h6>
+        </header>
+        <div class="w3-padding">
+            <!-- Form for adding goals -->
+            <form method="post" action="{% url 'add_todo_item' %}">
+                {% csrf_token %}
+                <input type="text" name="title" id="goalInput" class="w3-input w3-border" placeholder="Enter your goal">
+                <button type="submit" class="w3-button w3-theme-dark">Add Goal</button>
+            </form>
+            
+            <!-- List to display added goals -->
+            <ul id="goalList" class="w3-ul w3-margin-top">
+    
+                    {% for todo in todos %}
+                    <li>
+                        {{todo.title }}: {% if todo.completed %}Completed{% else %}Incomplete{% endif %}
+                    </li>
+                    {% endfor %}
+            </ul>
+        </div>
+        <footer class="w3-container w3-theme-l1">
+            <p>Modal footer</p>
+        </footer>
+    </div>
+</div>
+
+<style>
+    .goal-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .goal-text {
+        flex-grow: 1;
+    }
+
+    .remove-button {
+        margin-left: 10px; /* Adjust this value to change the padding */
+    }
+</style>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-dark w3-padding-16">
+    <h3>Footer</h3>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+        <span class="w3-text w3-theme-light w3-padding">Go To Top</span>  
+        <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge"> <i class="fa fa-chevron-circle-up"></i></span></a>
+    </div>
+    <p>Remember to check out our <a href="w3css_references.asp" class="w3-btn w3-theme-light" target="_blank">W3.CSS Reference</a></p>
+</footer>
+
+<!-- Script for Sidebar -->
+<script>
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
