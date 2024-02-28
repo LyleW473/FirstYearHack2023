@@ -8,7 +8,7 @@
     {% endfor %}
 </u1>
 
-<!-- Additional content -->
+<!-- Add todo button -->
 <div>
     <h2>Add New Todo</h2>
     <form method="post" action="{% url 'add_todo_item' %}">
@@ -17,4 +17,15 @@
         <button type="submit">Add Todo</button>
     </form>
 </div>
+
+<!-- Clear todos button -->
+<div>
+    <h2>Clear Todos</h2>
+    <form method="post" action="{% url 'clear_todos' %}">
+        {% csrf_token %}
+        <button type="submit">Clear todos</button>
+        </u1>
+    </form>
+</div>
+
 {% endblock %}

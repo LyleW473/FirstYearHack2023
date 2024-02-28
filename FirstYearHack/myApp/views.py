@@ -17,3 +17,7 @@ def add_todo(request):
         if form.is_valid():
             form.save()
     return redirect("todos")
+
+def clear_todos(request):
+    ToDoItem.objects.all().delete() # Delete all ToDoItem objects
+    return redirect("todos")

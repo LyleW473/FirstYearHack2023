@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
                 path("", views.home, name="home"), # Base URL of website
                 path("todos/", views.todos, name="todos"),
-                path("add/", views.add_todo, name="add_todo_item")
+                path("add/", views.add_todo, name="add_todo_item"),
+                path("clear/", views.clear_todos,name="clear_todos"),
                 ]
